@@ -1,0 +1,12 @@
+Celery==5.2.6
+Django==4.0.4
+django-environ==0.8.1
+django-filter==21.1
+djangorestframework==3.13.1
+drf-yasg==1.20.0
+gunicorn==20.1.0
+psycopg2-binary==2.9.3
+pytz
+redis==4.2.2
+sentry-sdk==1.5.9
+dj-database-url==0.5.0

@@ -1,0 +1,26 @@
+-r requirements.txt
+
+Pygments==2.11.2
+Werkzeug==2.1.1
+bandit==1.7.4
+black==22.3.0
+coverage==6.3.2
+django-debug-toolbar==3.2.4
+django-extensions==3.1.5
+docker-compose==1.29.2
+ipdb==0.13.9
+ipython==8.2.0
+isort==5.10.1
+model-bakery==1.5.0
+pip-tools==6.6.0
+pre-commit==2.18.1
+pylama==8.3.8
+pylint-celery==0.3
+pylint-django==2.5.3
+pylint==2.13.5
+pytest-cov==3.0.0
+pytest-django==4.5.2
+pytest-mock==3.7.0
+pytest==7.1.1
+radon==5.1.0
+safety==1.10.3
