@@ -71,12 +71,12 @@ jobs:
           name: Check for uncreated migrations
           command: |
             . .env/bin/activate
-            ./api/manage.py makemigrations --check --dry-run
+            python3 api/manage.py makemigrations --check --dry-run
       - run:
           name: Run tests
           command: |
             . .env/bin/activate
-            ./api/manage.py collectstatic --no-input
+            python3 manage.py collectstatic --no-input
             pytest --cache-clear --capture=no --showlocals --verbose --cov=src --cov-report html --no-migrations --junitxml ./test-results/test-results.xml
       - store_test_results:
           path: ~/project/api/test-results

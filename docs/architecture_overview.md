@@ -22,5 +22,5 @@ We user [Docker](https://www.docker.com/) and [docker-compose](https://docs.dock
 | --------- | ----- |
 | `0` | Not used |
 | `1` | Celery broker |
-| `2` | Direct usage with [`redis_client`](./api/src/apps/common/utils/redis.py#L9) function in main application |
+| `2` | Direct usage with [`redis_client`](./src/apps/common/utils/redis.py#L9) function in main application |
 | `3` - `15` | Not used |

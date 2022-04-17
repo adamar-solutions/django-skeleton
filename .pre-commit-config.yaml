@@ -2,7 +2,7 @@ default_language_version:
   python: python
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.2.0
     hooks:
       - id: check-added-large-files
         args: ['--maxkb=10000']
@@ -18,13 +18,13 @@ repos:
       - id: pretty-format-json
         args: ['--autofix', '--indent 2', ]
   - repo: https://github.com/ambv/black
-    rev: 21.6b0
+    rev: 22.3.0
     hooks:
       - id: black
         args: [.]
         pass_filenames: false
   - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.9.1
+    rev: v5.10.1
     hooks:
       - id: isort
   - repo: https://github.com/gvanderest/pylama-pre-commit
@@ -36,9 +36,9 @@ repos:
           - pycodestyle
           - pyflakes
           - radon
-        args: ['-o', './api/pylama.ini']
+        args: ['-o', 'pylama.ini']
   - repo: https://github.com/PyCQA/bandit
-    rev: master
+    rev: 1.7.4
     hooks:
       - id: bandit
         args: ['--skip', 'B101']
@@ -50,12 +50,12 @@ repos:
       - id: python-use-type-annotations
       - id: rst-backticks
   - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.2.1
+    rev: v1.2.4
     hooks:
       - id: python-safety-dependencies-check
         entry: safety
         args: [check]
-        files: ./api/requirements.txt
+        files: .requirements.txt
   - repo: https://github.com/codespell-project/codespell
     rev: v2.1.0
     hooks:
@@ -65,6 +65,6 @@ repos:
       - id: migrations-check
         language: system
         name: Check for uncreated migrations.
-        entry: sh -c "./api/manage.py makemigrations --check --dry-run"
+        entry: sh -c "python3 manage.py makemigrations --check --dry-run"
         files: models/*.*\.py$
         stages: [commit]
