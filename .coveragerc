@@ -1,0 +1,29 @@
+[run]
+omit =
+    *migrations*
+    *tests*
+    /usr/*
+    */env/*
+    */urls.py
+    src/fixtures/*
+    src/apps/accounts/api/authentication.py
+    src/apps/common/management/commands/generate_secretkey.py
+    src/apps/common/management/commands/startapp.py
+    src/apps/common/utils/redis.py
+    src/loggers.py
+    src/wsgi.py
+    */admin.py
+
+[report]
+exclude_lines =
+    noqa
+    pragma: no cover
+    def __unicode__
+    def __repr__
+    def __str__
+    if settings\.DEBUG
+    raise AssertionError
+    raise NotImplementedError
+    assert
+
+show_missing = True
