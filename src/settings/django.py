@@ -107,12 +107,12 @@ USE_TZ = True
 LOCALE_PATHS = [rel("..", "..", "api", "locale")]
 
 STATIC_URL = env.str("SRC_STATIC_URL", default="/s/")
-STATIC_ROOT = env.str("SRC_STATIC_ROOT", default=rel("..", "..", "public", "static"))
+STATIC_ROOT = env.str("SRC_STATIC_ROOT", default=rel("..", "public", "static"))
 
 MEDIA_URL = env.str("SRC_MEDIA_URL", default="/m/")
-MEDIA_ROOT = env.str("SRC_MEDIA_ROOT", rel("..", "..", "public", "media"))
+MEDIA_ROOT = env.str("SRC_MEDIA_ROOT", rel("..", "public", "media"))
 
-EMAIL_BACKEND = env.str("SRC_EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend")
+EMAIL_BACKEND = env.str("SRC_EMAIL_BACKEND", default=None)
 if EMAIL_BACKEND == "django.core.mail.backends.smtp.EmailBackend":  # pragma: no cover
     EMAIL_HOST = env.str("SRC_EMAIL_HOST")
     EMAIL_PORT = env.str("SRC_EMAIL_PORT")

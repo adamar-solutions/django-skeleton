@@ -1,6 +1,7 @@
 Celery==5.2.6
 Django==4.0.4
 django-environ==0.8.1
+django-extensions==3.1.5
 django-filter==21.1
 djangorestframework==3.13.1
 drf-yasg==1.20.0
