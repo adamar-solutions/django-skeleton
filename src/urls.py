@@ -2,6 +2,11 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path, re_path
 
+from rest_framework import permissions
+
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+
 
 PLATFORM_PREFIX = "_platform"
 API_PREFIX = "api"
@@ -20,43 +25,37 @@ api_v1_urlpatterns = [
 
 urlpatterns = admin_urlpatterns + api_v1_urlpatterns
 
-# enable Swagger
-if "SWAGGER" in settings.SRC_FEATURES:
-    from rest_framework import permissions
 
-    from drf_yasg import openapi
-    from drf_yasg.views import get_schema_view
+api_v1_schema_view = get_schema_view(
+    openapi.Info(
+        title="src",
+        default_version="v1",
+        description="src API v1 description",
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+    patterns=api_v1_urlpatterns,
+)
 
-    api_v1_schema_view = get_schema_view(
-        openapi.Info(
-            title="src",
-            default_version="v1",
-            description="src API v1 description",
-        ),
-        public=True,
-        permission_classes=(permissions.AllowAny,),
-        patterns=api_v1_urlpatterns,
-    )
+swagger_urlpatterns = [
+    re_path(
+        f"{PLATFORM_PREFIX}/{DOCS_PREFIX}/v1/" + r"swagger(?P<format>\.json|\.yaml)$",
+        api_v1_schema_view.without_ui(cache_timeout=0),
+        name="v1-schema-json",
+    ),
+    path(
+        f"{PLATFORM_PREFIX}/{DOCS_PREFIX}/v1/swagger/",
+        api_v1_schema_view.with_ui("swagger", cache_timeout=0),
+        name="v1-schema-swagger-ui",
+    ),
+    path(
+        f"{PLATFORM_PREFIX}/{DOCS_PREFIX}/v1/redoc/",
+        api_v1_schema_view.with_ui("redoc", cache_timeout=0),
+        name="v1-schema-redoc",
+    ),
+]
 
-    swagger_urlpatterns = [
-        re_path(
-            f"{PLATFORM_PREFIX}/{DOCS_PREFIX}/v1/" + r"swagger(?P<format>\.json|\.yaml)$",
-            api_v1_schema_view.without_ui(cache_timeout=0),
-            name="v1-schema-json",
-        ),
-        path(
-            f"{PLATFORM_PREFIX}/{DOCS_PREFIX}/v1/swagger/",
-            api_v1_schema_view.with_ui("swagger", cache_timeout=0),
-            name="v1-schema-swagger-ui",
-        ),
-        path(
-            f"{PLATFORM_PREFIX}/{DOCS_PREFIX}/v1/redoc/",
-            api_v1_schema_view.with_ui("redoc", cache_timeout=0),
-            name="v1-schema-redoc",
-        ),
-    ]
-
-    urlpatterns += swagger_urlpatterns
+urlpatterns += swagger_urlpatterns
 
 # enable serve static by django for local develop
 if settings.DEBUG:  # pragma: no cover
